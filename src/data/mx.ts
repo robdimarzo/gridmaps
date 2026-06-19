@@ -1,39 +1,38 @@
 import type { TileMapDataset } from "../types.js";
 
-// Placeholder 6×6 alphabetical grid — replace with a geographic layout.
 const positions: Record<string, { row: number; column: number }> = {
-	"MX-AGU": { row: 1, column: 1 },
-	"MX-BCN": { row: 1, column: 2 },
-	"MX-BCS": { row: 1, column: 3 },
-	"MX-CAM": { row: 1, column: 4 },
-	"MX-CHP": { row: 1, column: 5 },
-	"MX-CHH": { row: 1, column: 6 },
-	"MX-COA": { row: 2, column: 1 },
-	"MX-COL": { row: 2, column: 2 },
-	"MX-DUR": { row: 2, column: 3 },
-	"MX-GUA": { row: 2, column: 4 },
-	"MX-GRO": { row: 2, column: 5 },
-	"MX-HID": { row: 2, column: 6 },
-	"MX-JAL": { row: 3, column: 1 },
-	"MX-CMX": { row: 3, column: 2 },
-	"MX-MEX": { row: 3, column: 3 },
-	"MX-MIC": { row: 3, column: 4 },
-	"MX-MOR": { row: 3, column: 5 },
-	"MX-NAY": { row: 3, column: 6 },
-	"MX-NLE": { row: 4, column: 1 },
-	"MX-OAX": { row: 4, column: 2 },
-	"MX-PUE": { row: 4, column: 3 },
-	"MX-QUE": { row: 4, column: 4 },
-	"MX-ROO": { row: 4, column: 5 },
-	"MX-SLP": { row: 4, column: 6 },
-	"MX-SIN": { row: 5, column: 1 },
-	"MX-SON": { row: 5, column: 2 },
-	"MX-TAB": { row: 5, column: 3 },
-	"MX-TAM": { row: 5, column: 4 },
-	"MX-TLX": { row: 5, column: 5 },
-	"MX-VER": { row: 5, column: 6 },
-	"MX-YUC": { row: 6, column: 1 },
-	"MX-ZAC": { row: 6, column: 2 },
+	"MX-BCN": { row: 1, column: 1  }, // Baja California
+	"MX-BCS": { row: 2, column: 1  }, // Baja California Sur
+	"MX-SON": { row: 1, column: 3  }, // Sonora
+	"MX-SIN": { row: 2, column: 3  }, // Sinaloa
+	"MX-NAY": { row: 3, column: 4  }, // Nayarit
+	"MX-CHH": { row: 1, column: 4  }, // Chihuahua
+	"MX-COA": { row: 1, column: 5  }, // Coahuila
+	"MX-NLE": { row: 2, column: 6  }, // Nuevo León
+	"MX-TAM": { row: 2, column: 7  }, // Tamaulipas
+	"MX-DUR": { row: 2, column: 4  }, // Durango
+	"MX-ZAC": { row: 2, column: 5  }, // Zacatecas
+	"MX-SLP": { row: 3, column: 7  }, // San Luis Potosí
+	"MX-AGU": { row: 3, column: 6  }, // Aguascalientes
+	"MX-JAL": { row: 3, column: 5  }, // Jalisco
+	"MX-COL": { row: 4, column: 5  }, // Colima
+	"MX-MIC": { row: 5, column: 5  }, // Michoacán
+	"MX-GUA": { row: 4, column: 6  }, // Guanajuato
+	"MX-QUE": { row: 4, column: 7  }, // Querétaro
+	"MX-HID": { row: 4, column: 8  }, // Hidalgo
+	"MX-MEX": { row: 5, column: 6  }, // Estado de México
+	"MX-CMX": { row: 5, column: 7  }, // Ciudad de México
+	"MX-MOR": { row: 6, column: 7  }, // Morelos
+	"MX-TLX": { row: 5, column: 8  }, // Tlaxcala
+	"MX-PUE": { row: 6, column: 8  }, // Puebla
+	"MX-VER": { row: 6, column: 9  }, // Veracruz
+	"MX-TAB": { row: 6, column: 10 }, // Tabasco
+	"MX-GRO": { row: 6, column: 6  }, // Guerrero
+	"MX-OAX": { row: 7, column: 8  }, // Oaxaca
+	"MX-CHP": { row: 7, column: 9  }, // Chiapas
+	"MX-CAM": { row: 5, column: 10 }, // Campeche
+	"MX-YUC": { row: 5, column: 11 }, // Yucatán
+	"MX-ROO": { row: 6, column: 11 }, // Quintana Roo
 };
 
 export const mxDataset: TileMapDataset = {
@@ -49,7 +48,7 @@ export const mxDataset: TileMapDataset = {
 				default: {
 					id: "default",
 					name: "States and Federal District",
-					grid: { columns: 6, rows: 6 },
+					grid: { columns: 11, rows: 7 },
 					positions,
 				},
 			},
