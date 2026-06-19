@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tile-map demo</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        padding: 2rem;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: #0f172a;
+        color: #e2e8f0;
+        min-height: 100vh;
+      }
+
+      h1 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0 0 1.5rem;
+        letter-spacing: 0.04em;
+        color: #94a3b8;
+        text-transform: uppercase;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 2rem;
+        align-items: start;
+      }
+
+      /* Controls panel */
+      .controls {
+        background: #1e293b;
+        border-radius: 12px;
+        padding: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #64748b;
+      }
+
+      select {
+        appearance: none;
+        background: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 6px;
+        padding: 0.45rem 0.6rem;
+        color: #e2e8f0;
+        font-size: 0.85rem;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      select:focus {
+        outline: 2px solid #4299e1;
+        border-color: transparent;
+      }
+
+      .checkbox-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .checkbox-row input[type="checkbox"] {
+        accent-color: #4299e1;
+        width: 1rem;
+        height: 1rem;
+        cursor: pointer;
+      }
+
+      .checkbox-row span {
+        font-size: 0.85rem;
+        color: #cbd5e0;
+      }
+
+      .divider {
+        border: none;
+        border-top: 1px solid #334155;
+        margin: 0;
+      }
+
+      .info-box {
+        background: #0f172a;
+        border-radius: 6px;
+        padding: 0.6rem 0.75rem;
+        font-size: 0.75rem;
+        color: #94a3b8;
+        min-height: 1.5rem;
+      }
+
+      .info-box pre {
+        margin: 0;
+        font-family: 'SF Mono', Menlo, monospace;
+        font-size: 0.7rem;
+        white-space: pre-wrap;
+        word-break: break-all;
+        max-height: 160px;
+        overflow-y: auto;
+      }
+
+      /* Map area */
+      .map-area {
+        background: #1e293b;
+        border-radius: 12px;
+        padding: 2rem;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        overflow: auto;
+      }
+
+      tile-map {
+        --tile-map-tile-size: 2.75rem;
+        --tile-map-gap: 3px;
+        --tile-map-radius: 5px;
+        --tile-map-bg: #334155;
+        --tile-map-hover-bg: #475569;
+        --tile-map-selected-bg: #4299e1;
+        --tile-map-selected-color: #fff;
+        --tile-map-color: #e2e8f0;
+        --tile-map-font-size: 0.62rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>&lt;tile-map&gt; demo</h1>
+
+    <div class="layout">
+      <!-- Controls -->
+      <aside class="controls">
+        <div class="control-group">
+          <label for="country-select">Country</label>
+          <select id="country-select">
+            <option value="us" selected>United States</option>
+            <option value="jp">Japan</option>
+            <option value="ca">Canada</option>
+            <option value="au">Australia</option>
+            <option value="uk">United Kingdom</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="layer-select">Layer</label>
+          <select id="layer-select"></select>
+        </div>
+
+        <div class="control-group">
+          <label for="layout-select">Layout variant</label>
+          <select id="layout-select"></select>
+        </div>
+
+        <hr class="divider" />
+
+        <div class="control-group">
+          <label for="label-mode-select">Label mode</label>
+          <select id="label-mode-select">
+            <option value="abbrev" selected>Abbreviation</option>
+            <option value="name">Name</option>
+            <option value="native">Native</option>
+            <option value="bilingual">Bilingual</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="locale-select">Locale</label>
+          <select id="locale-select">
+            <option value="en" selected>English (en)</option>
+            <option value="ja">Japanese (ja)</option>
+            <option value="fr">French (fr)</option>
+          </select>
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="multiple-checkbox" />
+          <span>Allow multi-select</span>
+        </div>
+
+        <hr class="divider" />
+
+        <div class="control-group">
+          <label>Hover</label>
+          <div class="info-box" id="hover-output">—</div>
+        </div>
+
+        <div class="control-group">
+          <label>Selection</label>
+          <div class="info-box">
+            <pre id="selection-output">{}</pre>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Map -->
+      <main class="map-area">
+        <tile-map id="tile-map" country="us"></tile-map>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

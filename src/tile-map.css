@@ -1,0 +1,74 @@
+:host {
+	display: inline-block;
+	font-family: var(--tile-map-font-family, system-ui, sans-serif);
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(
+		var(--_cols, 1),
+		var(--tile-map-tile-size, 2.5rem)
+	);
+	grid-template-rows: repeat(
+		var(--_cols, 1),
+		var(--tile-map-tile-size, 2.5rem)
+	);
+	gap: var(--tile-map-gap, 2px);
+}
+
+.cell {
+	/* grid-column and grid-row placed inline */
+}
+
+button[part="tile"] {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	padding: 0;
+	background: var(--tile-map-bg, #e2e8f0);
+	border: 1px solid var(--tile-map-border, transparent);
+	border-radius: var(--tile-map-radius, 4px);
+	color: var(--tile-map-color, #1a202c);
+	font-size: var(--tile-map-font-size, 0.6rem);
+	font-family: inherit;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	cursor: pointer;
+	transition:
+		background 120ms ease,
+		color 120ms ease,
+		transform 80ms ease;
+	outline-offset: 2px;
+	line-height: 1;
+}
+
+button[part="tile"]:hover {
+	background: var(--tile-map-hover-bg, #cbd5e0);
+	transform: scale(1.08);
+	z-index: 1;
+	position: relative;
+}
+
+button[part="tile"]:focus-visible {
+	outline: 2px solid var(--tile-map-selected-bg, #4299e1);
+	outline-offset: 2px;
+	background: var(--tile-map-hover-bg, #cbd5e0);
+}
+
+button[part="tile"][aria-pressed="true"] {
+	background: var(--tile-map-selected-bg, #4299e1);
+	border-color: var(--tile-map-selected-border, transparent);
+	color: var(--tile-map-selected-color, #fff);
+}
+
+button[part="tile"][aria-pressed="true"]:hover {
+	background: var(--tile-map-selected-hover-bg, #3182ce);
+}
+
+.label {
+	pointer-events: none;
+	user-select: none;
+	text-align: center;
+}
