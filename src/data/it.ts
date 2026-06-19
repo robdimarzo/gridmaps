@@ -1,27 +1,26 @@
 import type { TileMapDataset } from "../types.js";
 
-// Placeholder 5×4 alphabetical grid — replace with a geographic layout.
 const positions: Record<string, { row: number; column: number }> = {
-	"IT-65": { row: 1, column: 1 }, // Abruzzo
-	"IT-23": { row: 1, column: 2 }, // Aosta Valley
-	"IT-75": { row: 1, column: 3 }, // Apulia
-	"IT-77": { row: 1, column: 4 }, // Basilicata
-	"IT-78": { row: 1, column: 5 }, // Calabria
-	"IT-72": { row: 2, column: 1 }, // Campania
-	"IT-45": { row: 2, column: 2 }, // Emilia-Romagna
-	"IT-36": { row: 2, column: 3 }, // Friuli Venezia Giulia
-	"IT-62": { row: 2, column: 4 }, // Lazio
-	"IT-42": { row: 2, column: 5 }, // Liguria
-	"IT-25": { row: 3, column: 1 }, // Lombardy
-	"IT-57": { row: 3, column: 2 }, // Marche
-	"IT-67": { row: 3, column: 3 }, // Molise
-	"IT-21": { row: 3, column: 4 }, // Piedmont
-	"IT-88": { row: 3, column: 5 }, // Sardinia
-	"IT-82": { row: 4, column: 1 }, // Sicily
-	"IT-32": { row: 4, column: 2 }, // Trentino-Alto Adige
-	"IT-52": { row: 4, column: 3 }, // Tuscany
-	"IT-55": { row: 4, column: 4 }, // Umbria
-	"IT-34": { row: 4, column: 5 }, // Veneto
+	"IT-23": { row: 1, column: 1 }, // Valle d'Aosta
+	"IT-25": { row: 1, column: 2 }, // Lombardia
+	"IT-32": { row: 1, column: 3 }, // Trentino-Alto Adige
+	"IT-21": { row: 2, column: 2 }, // Piemonte
+	"IT-34": { row: 2, column: 3 }, // Veneto
+	"IT-36": { row: 2, column: 4 }, // Friuli Venezia Giulia
+	"IT-42": { row: 3, column: 2 }, // Liguria
+	"IT-45": { row: 3, column: 3 }, // Emilia-Romagna
+	"IT-52": { row: 4, column: 2 }, // Tuscany
+	"IT-55": { row: 4, column: 3 }, // Umbria
+	"IT-57": { row: 4, column: 4 }, // Marche
+	"IT-62": { row: 5, column: 3 }, // Lazio
+	"IT-65": { row: 5, column: 4 }, // Abruzzo
+	"IT-88": { row: 6, column: 1 }, // Sardinia
+	"IT-72": { row: 6, column: 3 }, // Campania
+	"IT-67": { row: 6, column: 4 }, // Molise
+	"IT-77": { row: 7, column: 3 }, // Basilicata
+	"IT-75": { row: 7, column: 4 }, // Apulia
+	"IT-78": { row: 8, column: 3 }, // Calabria
+	"IT-82": { row: 9, column: 2 }, // Sicily
 };
 
 export const itDataset: TileMapDataset = {
@@ -37,7 +36,7 @@ export const itDataset: TileMapDataset = {
 				default: {
 					id: "default",
 					name: "20 Regions",
-					grid: { columns: 5, rows: 4 },
+					grid: { columns: 4, rows: 9 },
 					positions,
 				},
 			},
