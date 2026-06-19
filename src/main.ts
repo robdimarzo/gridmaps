@@ -11,7 +11,7 @@ const map = document.getElementById('tile-map') as HTMLElement & {
   multiple: boolean;
 };
 
-const countrySelect = document.getElementById('country-select') as HTMLSelectElement;
+const countryLinks = document.querySelectorAll<HTMLAnchorElement>('.country-nav a');
 const layerSelect = document.getElementById('layer-select') as HTMLSelectElement;
 const layoutSelect = document.getElementById('layout-select') as HTMLSelectElement;
 const labelModeSelect = document.getElementById('label-mode-select') as HTMLSelectElement;
@@ -19,6 +19,13 @@ const localeSelect = document.getElementById('locale-select') as HTMLSelectEleme
 const multipleCheckbox = document.getElementById('multiple-checkbox') as HTMLInputElement;
 const selectionOutput = document.getElementById('selection-output') as HTMLElement;
 const hoverOutput = document.getElementById('hover-output') as HTMLElement;
+
+let currentCountry = 'us';
+
+function getCountryFromPath(): string {
+  const key = window.location.pathname.replace(/^\//, '').split('/')[0];
+  return key in bundledDatasets ? key : 'us';
+}
 
 function updateLayerOptions(country: string) {
   const ds = bundledDatasets[country];
@@ -50,7 +57,7 @@ function updateLayoutOptions(country: string, layerId: string) {
 }
 
 function syncMap() {
-  map.country = countrySelect.value;
+  map.country = currentCountry;
   map.layer = layerSelect.value;
   map.layout = layoutSelect.value;
   map.labelMode = labelModeSelect.value;
@@ -58,16 +65,38 @@ function syncMap() {
   map.multiple = multipleCheckbox.checked;
 }
 
-countrySelect.addEventListener('change', () => {
-  updateLayerOptions(countrySelect.value);
+function setActiveLink(country: string) {
+  countryLinks.forEach(a => {
+    a.classList.toggle('active', a.dataset.country === country);
+  });
+}
+
+function navigate(country: string, push = true) {
+  currentCountry = country;
+  if (push) history.pushState({}, '', `/${country}`);
+  setActiveLink(country);
+  updateLayerOptions(country);
   syncMap();
+}
+
+// Country link clicks
+countryLinks.forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    navigate(a.dataset.country!);
+  });
 });
 
+// Browser back / forward
+window.addEventListener('popstate', () => {
+  navigate(getCountryFromPath(), false);
+});
+
+// Layer / layout / options changes
 layerSelect.addEventListener('change', () => {
-  updateLayoutOptions(countrySelect.value, layerSelect.value);
+  updateLayoutOptions(currentCountry, layerSelect.value);
   syncMap();
 });
-
 layoutSelect.addEventListener('change', syncMap);
 labelModeSelect.addEventListener('change', syncMap);
 localeSelect.addEventListener('change', syncMap);
@@ -87,6 +116,5 @@ map.addEventListener('tile-hover-leave', () => {
   hoverOutput.textContent = '—';
 });
 
-// Init
-updateLayerOptions(countrySelect.value);
-syncMap();
+// Init from URL
+navigate(getCountryFromPath(), false);

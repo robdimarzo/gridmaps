@@ -32,6 +32,34 @@
         align-items: start;
       }
 
+      /* Country nav */
+      .country-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .country-nav a {
+        display: block;
+        padding: 0.4rem 0.65rem;
+        border-radius: 6px;
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 0.85rem;
+        transition: background 120ms ease, color 120ms ease;
+      }
+
+      .country-nav a:hover {
+        background: #334155;
+        color: #e2e8f0;
+      }
+
+      .country-nav a.active {
+        background: #4299e1;
+        color: #fff;
+        font-weight: 600;
+      }
+
       /* Controls panel */
       .controls {
         background: #1e293b;
@@ -147,14 +175,17 @@
       <!-- Controls -->
       <aside class="controls">
         <div class="control-group">
-          <label for="country-select">Country</label>
-          <select id="country-select">
-            <option value="us" selected>United States</option>
-            <option value="jp">Japan</option>
-            <option value="ca">Canada</option>
-            <option value="au">Australia</option>
-            <option value="uk">United Kingdom</option>
-          </select>
+          <label>Country</label>
+          <nav class="country-nav">
+            <a href="/us" data-country="us">United States</a>
+            <a href="/ca" data-country="ca">Canada</a>
+            <a href="/mx" data-country="mx">Mexico</a>
+            <a href="/uk" data-country="uk">United Kingdom</a>
+            <a href="/it" data-country="it">Italy</a>
+            <a href="/au" data-country="au">Australia</a>
+            <a href="/in" data-country="in">India</a>
+            <a href="/jp" data-country="jp">Japan</a>
+          </nav>
         </div>
 
         <div class="control-group">
@@ -183,8 +214,11 @@
           <label for="locale-select">Locale</label>
           <select id="locale-select">
             <option value="en" selected>English (en)</option>
-            <option value="ja">Japanese (ja)</option>
             <option value="fr">French (fr)</option>
+            <option value="es">Spanish (es)</option>
+            <option value="it">Italian (it)</option>
+            <option value="ja">Japanese (ja)</option>
+            <option value="hi">Hindi (hi)</option>
           </select>
         </div>
 
